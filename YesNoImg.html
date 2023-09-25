@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Yes-NoImg Api</title>
+</head>
+<body>
+    <button onclick="
+        getJoke();
+        postTry();">
+    getImg</button>
+
+    <div id="img"></div>
+
+    <script>
+        const img = document.getElementById("img");
+
+        const API_ENDPOINT = 'https://yesno.wtf/api';
+
+//#region Get method
+        function getJoke()
+        {
+            fetch(API_ENDPOINT)
+            .then(data => data.json())
+            .then(data => setImg(data.image))
+        }
+
+        function setImg(imgResponse)
+        {
+            img.innerHTML = `<img src=\"${imgResponse}\" width=\"600px\" height=\"400px\">`;
+        }
+//#endregion
+
+//#region Post method
+        function postTry()
+        {
+            fetch('https://reqres.in/api/users', {
+                method: "post",
+
+                body: JSON.stringify({
+                    id: 2,
+                    title: "Whats_up"
+                }),
+
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(resposnse => resposnse.json())
+            .then(resposnse => console.log(resposnse))
+
+        }
+    </script>
+</body>
+</html>
